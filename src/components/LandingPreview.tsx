@@ -136,30 +136,125 @@ export default function LandingPreview({ item }: LandingPreviewProps) {
       </div>
 
       {/* Fake screenshot / gradient block */}
+      {/* Product Preview */}
       <div
-        className="mx-6 h-28 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative"
-        style={{
-          background: `linear-gradient(135deg, ${colors.primary}33, ${colors.secondary}22, ${colors.accent}11)`,
-          border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'}`,
+        className="mx-6 h-48 rounded-2xl mb-8 flex items-center justify-center overflow-hidden relative" style={{
+          background: `linear-gradient(
+      135deg,
+      ${colors.primary}22,
+      ${colors.secondary}15,
+      ${colors.accent}10
+    )`,
+          border: `1px solid ${isDark
+            ? 'rgba(255,255,255,0.08)'
+            : 'rgba(0,0,0,0.06)'
+            }`,
         }}
       >
-        <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-30">
+        {/* Background decoration */}
+        <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-30">
           {[...Array(5)].map((_, i) => (
             <div
               key={i}
-              className="rounded-md"
+              className="rounded-xl"
               style={{
-                width: `${40 + i * 12}px`,
-                height: `${24 + (i % 3) * 8}px`,
-                backgroundColor: colors.primary,
-                opacity: 0.4 + i * 0.1,
+                width: `${48 + i * 10}px`,
+                height: `${28 + (i % 3) * 10}px`,
+                backgroundColor: `${colors.primary}22`,
+                border: `1px solid ${colors.primary}33`,
               }}
             />
           ))}
         </div>
-        <p className="text-xs font-medium z-10" style={{ color: colors.primary }}>
-          Product Preview
-        </p>
+
+        {/* Fake browser */}
+        <div
+          className="mx-6 h-48 rounded-2xl mb-8 flex items-center justify-center overflow-hidden relative"
+          style={{
+            background: `linear-gradient(
+      135deg,
+      ${colors.primary}22,
+      ${colors.secondary}15,
+      ${colors.accent}10
+    )`,
+            border: `1px solid ${isDark
+              ? 'rgba(255,255,255,0.08)'
+              : 'rgba(0,0,0,0.06)'
+              }`,
+          }}
+        >
+          <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-30">
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className="rounded-xl"
+                style={{
+                  width: `${48 + i * 10}px`,
+                  height: `${28 + (i % 3) * 10}px`,
+                  backgroundColor: `${colors.primary}22`,
+                  border: `1px solid ${colors.primary}33`,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+            <span
+              className="text-[11px] font-semibold uppercase tracking-[0.18em]"
+              style={{ color: colors.primary }}
+            >
+              PRODUCT PREVIEW
+            </span>
+          </div>
+
+          <div
+            className="relative z-10 w-[280px] rounded-xl overflow-hidden"
+            style={{
+              backgroundColor: isDark ? '#0F172A' : '#FFFFFF',
+              border: `1px solid ${isDark
+                ? 'rgba(255,255,255,0.08)'
+                : 'rgba(0,0,0,0.06)'
+                }`,
+              boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+            }}
+          >
+            <div
+              className="flex items-center gap-1.5 px-3 py-2 border-b"
+              style={{
+                borderColor: isDark
+                  ? 'rgba(255,255,255,0.08)'
+                  : 'rgba(0,0,0,0.06)',
+              }}
+            >
+              <div className="w-2 h-2 rounded-full bg-red-400" />
+              <div className="w-2 h-2 rounded-full bg-yellow-400" />
+              <div className="w-2 h-2 rounded-full bg-green-400" />
+            </div>
+
+            <div className="p-4">
+              <div
+                className="h-2 rounded-full mb-2"
+                style={{ backgroundColor: `${colors.primary}55` }}
+              />
+
+              <div
+                className="h-2 rounded-full w-4/5 mb-4"
+                style={{ backgroundColor: `${colors.primary}33` }}
+              />
+
+              <div
+                className="h-12 rounded-lg"
+                style={{
+                  background: `linear-gradient(
+            135deg,
+            ${colors.primary},
+            ${colors.secondary}
+          )`,
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
