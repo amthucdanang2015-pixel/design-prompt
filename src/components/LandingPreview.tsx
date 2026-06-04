@@ -135,123 +135,159 @@ export default function LandingPreview({ item }: LandingPreviewProps) {
         ))}
       </div>
 
-      {/* Fake screenshot / gradient block */}
-      {/* Product Preview */}
+      {/* Product Preview — fake browser */}
       <div
-        className="mx-6 h-48 rounded-2xl mb-8 flex items-center justify-center overflow-hidden relative" style={{
-          background: `linear-gradient(
-      135deg,
-      ${colors.primary}22,
-      ${colors.secondary}15,
-      ${colors.accent}10
-    )`,
-          border: `1px solid ${isDark
-            ? 'rgba(255,255,255,0.08)'
-            : 'rgba(0,0,0,0.06)'
-            }`,
+        className="mx-6 rounded-2xl mb-8 relative"
+        style={{
+          background: `linear-gradient(135deg, ${colors.primary}22, ${colors.secondary}15, ${colors.accent}10)`,
+          border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'}`,
+          padding: '24px 20px 20px',
         }}
       >
-        {/* Background decoration */}
-        <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-30">
+        {/* Background blobs */}
+        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-15 pointer-events-none overflow-hidden rounded-2xl">
           {[...Array(5)].map((_, i) => (
             <div
               key={i}
-              className="rounded-xl"
+              className="rounded-xl flex-shrink-0"
               style={{
-                width: `${48 + i * 10}px`,
-                height: `${28 + (i % 3) * 10}px`,
-                backgroundColor: `${colors.primary}22`,
-                border: `1px solid ${colors.primary}33`,
+                width: `${60 + i * 14}px`,
+                height: `${36 + (i % 3) * 14}px`,
+                backgroundColor: `${colors.primary}33`,
+                border: `1px solid ${colors.primary}44`,
               }}
             />
           ))}
         </div>
 
-        {/* Fake browser */}
+        {/* Browser window */}
         <div
-          className="mx-6 h-48 rounded-2xl mb-8 flex items-center justify-center overflow-hidden relative"
+          className="relative z-10 w-full max-w-sm mx-auto rounded-xl overflow-hidden"
           style={{
-            background: `linear-gradient(
-      135deg,
-      ${colors.primary}22,
-      ${colors.secondary}15,
-      ${colors.accent}10
-    )`,
-            border: `1px solid ${isDark
-              ? 'rgba(255,255,255,0.08)'
-              : 'rgba(0,0,0,0.06)'
-              }`,
+            backgroundColor: isDark ? '#1C1C1E' : '#FFFFFF',
+            border: `1px solid ${isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'}`,
+            boxShadow: '0 16px 48px rgba(0,0,0,0.25)',
           }}
         >
-          <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-30">
-            {[...Array(5)].map((_, i) => (
-              <div
-                key={i}
-                className="rounded-xl"
-                style={{
-                  width: `${48 + i * 10}px`,
-                  height: `${28 + (i % 3) * 10}px`,
-                  backgroundColor: `${colors.primary}22`,
-                  border: `1px solid ${colors.primary}33`,
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
-            <span
-              className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-              style={{ color: colors.primary }}
-            >
-              PRODUCT PREVIEW
-            </span>
-          </div>
-
+          {/* ── Browser chrome: traffic lights + tab bar ── */}
           <div
-            className="relative z-10 w-[280px] rounded-xl overflow-hidden"
             style={{
-              backgroundColor: isDark ? '#0F172A' : '#FFFFFF',
-              border: `1px solid ${isDark
-                ? 'rgba(255,255,255,0.08)'
-                : 'rgba(0,0,0,0.06)'
-                }`,
-              boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+              backgroundColor: isDark ? '#2C2C2E' : '#DEDEDE',
+              borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.12)'}`,
+            }}
+          >
+            {/* Traffic lights */}
+            <div className="flex items-center gap-1.5 px-3 pt-2.5 pb-1">
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#FF5F57' }} />
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#FFBD2E' }} />
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#28C840' }} />
+            </div>
+
+            {/* Tab bar */}
+            <div className="flex items-end px-2 gap-1">
+              {/* Active tab */}
+              <div
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-t-lg"
+                style={{
+                  backgroundColor: isDark ? '#1C1C1E' : '#FFFFFF',
+                  borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'}`,
+                  borderLeft: `1px solid ${isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'}`,
+                  borderRight: `1px solid ${isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'}`,
+                  maxWidth: '150px',
+                }}
+              >
+                {/* Favicon */}
+                <div
+                  className="w-3.5 h-3.5 rounded flex-shrink-0 flex items-center justify-center text-white font-bold"
+                  style={{
+                    backgroundColor: colors.primary,
+                    fontSize: '7px',
+                    lineHeight: 1,
+                  }}
+                >
+                  {item.title[0]}
+                </div>
+                <span
+                  className="truncate font-medium"
+                  style={{
+                    fontSize: '10px',
+                    color: isDark ? '#F1F5F9' : '#1E293B',
+                  }}
+                >
+                  {item.title}
+                </span>
+              </div>
+
+              {/* New Tab button */}
+              <div
+                className="flex items-center gap-1 px-2 py-1.5 rounded-t-lg flex-shrink-0"
+                style={{
+                  color: isDark ? '#94A3B8' : '#6B7280',
+                  opacity: 0.6,
+                }}
+              >
+                <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
+                  <path d="M5 1v8M1 5h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+                <span style={{ fontSize: '10px' }}>New Tab</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Address bar */}
+          <div
+            className="flex items-center px-2 py-1.5 gap-1.5"
+            style={{
+              backgroundColor: isDark ? '#1C1C1E' : '#F8FAFC',
+              borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}`,
             }}
           >
             <div
-              className="flex items-center gap-1.5 px-3 py-2 border-b"
+              className="flex-1 flex items-center gap-1.5 px-2 py-0.5 rounded"
               style={{
-                borderColor: isDark
-                  ? 'rgba(255,255,255,0.08)'
-                  : 'rgba(0,0,0,0.06)',
+                backgroundColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
+                color: isDark ? '#94A3B8' : '#64748B',
               }}
             >
-              <div className="w-2 h-2 rounded-full bg-red-400" />
-              <div className="w-2 h-2 rounded-full bg-yellow-400" />
-              <div className="w-2 h-2 rounded-full bg-green-400" />
+              <svg width="8" height="8" viewBox="0 0 12 12" fill="none">
+                <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1" />
+                <path
+                  d="M1 6h10M6 1c-1.5 1.8-2 3.3-2 5s.5 3.2 2 5M6 1c1.5 1.8 2 3.3 2 5s-.5 3.2-2 5"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span style={{ fontSize: '9px' }} className="truncate">
+                {item.title.toLowerCase().replace(/\s+/g, '')}.com
+              </span>
             </div>
+          </div>
 
-            <div className="p-4">
-              <div
-                className="h-2 rounded-full mb-2"
-                style={{ backgroundColor: `${colors.primary}55` }}
-              />
-
-              <div
-                className="h-2 rounded-full w-4/5 mb-4"
-                style={{ backgroundColor: `${colors.primary}33` }}
-              />
-
-              <div
-                className="h-12 rounded-lg"
-                style={{
-                  background: `linear-gradient(
-            135deg,
-            ${colors.primary},
-            ${colors.secondary}
-          )`,
-                }}
-              />
+          {/* Page skeleton content */}
+          <div className="p-4" style={{ backgroundColor: isDark ? '#1C1C1E' : '#FFFFFF' }}>
+            <div
+              className="h-2 rounded-full mb-2"
+              style={{ backgroundColor: `${colors.primary}55` }}
+            />
+            <div
+              className="h-2 rounded-full w-3/4 mb-4"
+              style={{ backgroundColor: `${colors.primary}33` }}
+            />
+            <div
+              className="h-10 rounded-lg mb-3"
+              style={{
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`,
+              }}
+            />
+            <div className="grid grid-cols-3 gap-1.5">
+              {[0.9, 0.6, 0.4].map((op, i) => (
+                <div
+                  key={i}
+                  className="h-1.5 rounded-full"
+                  style={{ backgroundColor: colors.primary, opacity: op }}
+                />
+              ))}
             </div>
           </div>
         </div>
