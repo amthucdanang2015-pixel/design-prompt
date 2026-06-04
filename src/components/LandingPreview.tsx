@@ -19,7 +19,7 @@ export default function LandingPreview({ item }: LandingPreviewProps) {
 
   return (
     <div
-      className="w-full h-full overflow-auto"
+      className={`w-full h-full overflow-auto ${isDark ? 'scrollbar-dark' : 'scrollbar-light'}`}
       style={{ backgroundColor: colors.bg, fontFamily, color: colors.text }}
     >
       {/* Nav */}
