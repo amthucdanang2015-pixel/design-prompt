@@ -36,7 +36,7 @@ export default function Sidebar({ items, selectedId, onSelect }: SidebarProps) {
             <p className="text-[10px] text-slate-500 leading-none mt-0.5">Design Explorer</p>
           </div>
         </div>
-        <span className="text-[10px] font-mono bg-white/5 text-slate-400 px-2 py-0.5 rounded-full">
+        <span className="text-[10px] m-10 font-mono bg-white/5 text-slate-400 px-2 py-0.5 rounded-full">
           {visibleCount}/{items.length}
         </span>
       </div>
@@ -89,13 +89,12 @@ export default function Sidebar({ items, selectedId, onSelect }: SidebarProps) {
 
       {/* Mobile drawer */}
       <div
-        className={`md:hidden fixed top-0 left-0 h-full w-72 z-50 transform transition-transform duration-300 ease-in-out ${
-          mobileOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`md:hidden fixed top-0 left-0 h-full w-72 z-50 transform transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <button
           onClick={() => setMobileOpen(false)}
-          className="absolute top-4 right-4 w-7 h-7 bg-white/10 rounded-lg flex items-center justify-center text-slate-300 text-sm z-10"
+          className="absolute top-12 right-4 w-7 h-7 bg-white/10 rounded-lg flex items-center justify-center text-slate-300 text-sm z-10"
           aria-label="Close sidebar"
         >
           ✕
