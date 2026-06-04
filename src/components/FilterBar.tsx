@@ -7,10 +7,26 @@ interface FilterBarProps {
   onChange: (filters: Filters) => void;
 }
 
-const modeOptions: { label: string; value: Mode }[] = [
+const SunIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" /><path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" /><path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+  </svg>
+);
+
+const MoonIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+  </svg>
+);
+
+const modeOptions: { label: string; value: Mode; icon?: React.ReactNode }[] = [
   { label: 'All', value: 'all' },
-  { label: 'Light', value: 'light' },
-  { label: 'Dark', value: 'dark' },
+  { label: 'Light', value: 'light', icon: <SunIcon /> },
+  { label: 'Dark', value: 'dark', icon: <MoonIcon /> },
 ];
 
 const typeOptions: { label: string; value: FontType }[] = [
@@ -22,43 +38,42 @@ const typeOptions: { label: string; value: FontType }[] = [
 
 export default function FilterBar({ filters, onChange }: FilterBarProps) {
   return (
-    <div className="px-4 py-3 space-y-3 border-b border-white/5">
-      {/* Mode filter */}
-      <div>
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500 mb-1.5">
-          Mode
-        </p>
-        <div className="flex gap-1">
+    <div className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-white/[0.06] px-3 py-2 sm:px-4 sm:py-3">
+      {/* Mode */}
+      <div className="flex items-center gap-1.5">
+        <span className="font-medium text-[10px] text-white/40 uppercase tracking-wider">Mode</span>
+        <div className="flex gap-0.5">
           {modeOptions.map((opt) => (
             <button
               key={opt.value}
+              type="button"
               onClick={() => onChange({ ...filters, mode: opt.value })}
-              className={`flex-1 text-xs py-1 rounded-md font-medium transition-all duration-150 ${
+              className={`flex items-center gap-1 rounded-md px-2 py-1 font-medium text-[11px] transition-all ${
                 filters.mode === opt.value
-                  ? 'bg-violet-600 text-white shadow-sm shadow-violet-900'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                  ? 'bg-white/15 text-white'
+                  : 'text-white/50 hover:bg-white/5 hover:text-white/70'
               }`}
             >
+              {opt.icon}
               {opt.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Type filter */}
-      <div>
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500 mb-1.5">
-          Type
-        </p>
-        <div className="flex gap-1">
+      {/* Type */}
+      <div className="flex items-center gap-1.5">
+        <span className="font-medium text-[10px] text-white/40 uppercase tracking-wider">Type</span>
+        <div className="flex gap-0.5">
           {typeOptions.map((opt) => (
             <button
               key={opt.value}
+              type="button"
               onClick={() => onChange({ ...filters, type: opt.value })}
-              className={`flex-1 text-xs py-1 rounded-md font-medium transition-all duration-150 ${
+              className={`flex items-center gap-1 rounded-md px-2 py-1 font-medium text-[11px] transition-all ${
                 filters.type === opt.value
-                  ? 'bg-violet-600 text-white shadow-sm shadow-violet-900'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                  ? 'bg-white/15 text-white'
+                  : 'text-white/50 hover:bg-white/5 hover:text-white/70'
               }`}
             >
               {opt.label}
