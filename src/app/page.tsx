@@ -13,6 +13,8 @@ export default function Home() {
   const [animating, setAnimating] = useState(false);
   const [displayedItem, setDisplayedItem] = useState<PromptItem>(prompts[0]);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
+  // Mobile master/detail: 'list' = sidebar visible, 'detail' = preview visible
+  const [mobileView, setMobileView] = useState<'list' | 'detail'>('list');
 
   // Resolve the displayed item from selectedId
   useEffect(() => {
@@ -28,6 +30,11 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);
 
+  const handleSelect = (id: string) => {
+    setSelectedId(id);
+    setMobileView('detail');
+  };
+
   const handlePrev = () => {
     const currentIndex = prompts.findIndex((p) => p.id === selectedId);
     const prevIndex = (currentIndex - 1 + prompts.length) % prompts.length;
@@ -42,14 +49,41 @@ export default function Home() {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-[#080812]">
-      {/* Left sidebar */}
-      <Sidebar items={prompts} selectedId={selectedId} onSelect={setSelectedId} />
+      {/* Left sidebar — full width on mobile when mobileView === 'list', hidden otherwise */}
+      <div
+        className={`
+          flex-shrink-0 h-full
+          ${mobileView === 'list' ? 'flex' : 'hidden'}
+          w-full
+          md:flex md:w-[260px] xl:w-[320px]
+        `}
+      >
+        <Sidebar items={prompts} selectedId={selectedId} onSelect={handleSelect} />
+      </div>
 
-      {/* Right preview panel */}
-      <main className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
+      {/* Right preview panel — full width on mobile when mobileView === 'detail', hidden otherwise */}
+      <main
+        className={`
+          flex-col min-w-0 min-h-0 overflow-hidden
+          ${mobileView === 'detail' ? 'flex' : 'hidden'}
+          w-full
+          md:flex md:flex-1
+        `}
+      >
         {/* Header bar */}
-        <div className="flex-shrink-0 flex items-center justify-between px-6 py-3 border-b border-white/5 bg-[#0B0B18]">
-          <div className="flex items-center gap-3 md:ml-0 ml-12 min-w-0 flex-1 mr-4">
+        <div className="flex-shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/5 bg-[#0B0B18]">
+          <div className="flex items-center gap-3 min-w-0 flex-1 mr-4">
+            {/* Mobile back button */}
+            <button
+              onClick={() => setMobileView('list')}
+              className="md:hidden flex-shrink-0 w-8 h-8 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:bg-white/5 flex items-center justify-center transition-all"
+              aria-label="Back to list"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+
             {/* Thumbnail */}
             <div
               className="w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center shadow-lg"
@@ -128,7 +162,7 @@ export default function Home() {
 
             {/* Open button */}
             <a
-              href={`/preview/${displayedItem.id}`}
+              href={`/${displayedItem.id}`}
               target="_self"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium text-xs transition-all hover:scale-[1.05] shadow-lg"
