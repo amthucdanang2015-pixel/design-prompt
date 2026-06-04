@@ -13,7 +13,6 @@ interface SidebarProps {
 
 export default function Sidebar({ items, selectedId, onSelect }: SidebarProps) {
   const [filters, setFilters] = useState<Filters>({ mode: 'all', type: 'all' });
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const visibleCount = items.filter((item) => {
     const modeMatch = filters.mode === 'all' || item.mode === filters.mode;
@@ -21,10 +20,10 @@ export default function Sidebar({ items, selectedId, onSelect }: SidebarProps) {
     return modeMatch && typeMatch;
   }).length;
 
-  const sidebarContent = (
-    <div className="flex flex-col h-full bg-[#0F0F1A] border-r border-white/5">
+  return (
+    <div className="flex flex-col w-full h-full bg-[#0F0F1A] border-r border-white/5">
       {/* Logo / Title */}
-      <div className="flex items-center justify-between px-4 py-4 border-b border-white/5">
+      <div className="flex items-center justify-between px-4 pt-5 pb-4 border-b border-white/5">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-900/40">
             <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -36,7 +35,7 @@ export default function Sidebar({ items, selectedId, onSelect }: SidebarProps) {
             <p className="text-[10px] text-slate-500 leading-none mt-0.5">Design Explorer</p>
           </div>
         </div>
-        <span className="text-[10px] m-10 font-mono bg-white/5 text-slate-400 px-2 py-0.5 rounded-full">
+        <span className="text-[10px] font-mono bg-white/5 text-slate-400 px-2 py-0.5 rounded-full">
           {visibleCount}/{items.length}
         </span>
       </div>
@@ -49,10 +48,7 @@ export default function Sidebar({ items, selectedId, onSelect }: SidebarProps) {
         items={items}
         filters={filters}
         selectedId={selectedId}
-        onSelect={(id) => {
-          onSelect(id);
-          setMobileOpen(false);
-        }}
+        onSelect={onSelect}
       />
 
       {/* Footer */}
@@ -64,48 +60,5 @@ export default function Sidebar({ items, selectedId, onSelect }: SidebarProps) {
         </div>
       </div>
     </div>
-  );
-
-  return (
-    <>
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 bg-[#0F0F1A] border border-white/10 rounded-lg flex items-center justify-center text-slate-300 shadow-lg"
-        aria-label="Open sidebar"
-      >
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
-
-      {/* Mobile drawer backdrop */}
-      {mobileOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
-
-      {/* Mobile drawer */}
-      <div
-        className={`md:hidden fixed top-0 left-0 h-full w-72 z-50 transform transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-      >
-        <button
-          onClick={() => setMobileOpen(false)}
-          className="absolute top-12 right-4 w-7 h-7 bg-white/10 rounded-lg flex items-center justify-center text-slate-300 text-sm z-10"
-          aria-label="Close sidebar"
-        >
-          ✕
-        </button>
-        {sidebarContent}
-      </div>
-
-      {/* Desktop sidebar: 320px on xl, 260px on md */}
-      <div className="hidden md:flex flex-col w-[260px] xl:w-[320px] flex-shrink-0 h-full">
-        {sidebarContent}
-      </div>
-    </>
   );
 }
