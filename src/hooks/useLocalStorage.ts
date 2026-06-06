@@ -6,14 +6,22 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
   const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   useEffect(() => {
+    let timeout: number | undefined;
+
     try {
       const item = window.localStorage.getItem(key);
       if (item) {
-        setStoredValue(JSON.parse(item) as T);
+        timeout = window.setTimeout(() => {
+          setStoredValue(JSON.parse(item) as T);
+        }, 0);
       }
     } catch {
       // ignore
     }
+
+    return () => {
+      if (timeout) window.clearTimeout(timeout);
+    };
   }, [key]);
 
   const setValue = (value: T) => {
