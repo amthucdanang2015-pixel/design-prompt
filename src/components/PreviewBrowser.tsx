@@ -8,9 +8,7 @@ interface PreviewBrowserProps {
 }
 
 export default function PreviewBrowser({ item }: PreviewBrowserProps) {
-  const fakeUrl = `https://${item.title.toLowerCase()}.app`;
-  const { colors, tagline, description, ctaLabel, features, mode } = item;
-  const isDark = mode === 'dark';
+  const { colors, url } = item;
 
   return (
     <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10">
@@ -82,7 +80,15 @@ export default function PreviewBrowser({ item }: PreviewBrowserProps) {
 
       {/* Browser content */}
       <div className="flex-1 overflow-hidden relative">
-        <LandingPreview item={item} />
+        {url ? (
+          <iframe
+            src={url}
+            className="w-full h-full border-0"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+          />
+        ) : (
+          <LandingPreview item={item} />
+        )}
       </div>
     </div>
   );

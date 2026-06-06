@@ -74,7 +74,7 @@ export default function PromptModal({ isOpen, onClose, item }: PromptModalProps)
       await navigator.clipboard.writeText(promptText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch {
       // Fallback copy
       const textarea = document.createElement('textarea');
       textarea.value = promptText;
