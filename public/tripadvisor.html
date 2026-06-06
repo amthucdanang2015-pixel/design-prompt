@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripAdvisor – Explore the World</title>
+  <link rel="icon" href="https://www.tripadvisor.com/favicon.ico" />
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif; margin:0; background:#f5f5f5; color:#111;}
+    .header {background:#00a699; color:#fff; padding:12px 24px; display:flex; align-items:center;}
+    .logo {font-weight:bold; font-size:1.4rem; margin-right:24px;}
+    .search {flex:1; display:flex;}
+    .search input {flex:1; padding:8px; border:none; border-radius:4px 0 0 4px;}
+    .search button {padding:8px 12px; border:none; background:#ff9500; color:#fff; border-radius:0 4px 4px 0; cursor:pointer;}
+    .main {padding:24px; max-width:1200px; margin:auto;}
+    .section {margin-bottom:48px;}
+    .section h2 {margin-bottom:16px; font-size:1.5rem; color:#333;}
+    .cards {display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:16px;}
+    .card {background:#fff; padding:16px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+    .hero {position:relative; height:300px; background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; margin-bottom:32px; border-radius:12px; overflow:hidden;}
+    .hero::after {content:""; position:absolute; inset:0; background:rgba(0,0,0,0.4);}
+    .hero h1 {position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:2rem; z-index:1;}
+    .footer {background:#222; color:#ccc; padding:24px; font-size:0.9rem; text-align:center;}
+    .footer a {color:#ccc; margin:0 8px; text-decoration:none;}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">TripAdvisor</div>
+    <div class="search">
+      <input type="text" placeholder="Where are you going?" />
+      <button>Search</button>
+    </div>
+  </header>
+
+  <div class="hero"><h1>Explore the World</h1></div>
+
+  <main class="main">
+    <section class="section">
+      <h2>Top Destinations</h2>
+      <div class="cards">
+        <div class="card">Paris, France</div>
+        <div class="card">Rome, Italy</div>
+        <div class="card">Tokyo, Japan</div>
+        <div class="card">New York, USA</div>
+        <div class="card">Sydney, Australia</div>
+        <div class="card">Cape Town, South Africa</div>
+        <div class="card">Barcelona, Spain</div>
+        <div class="card">Bangkok, Thailand</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Popular Hotels</h2>
+      <div class="cards">
+        <div class="card">Hotel Ritz, Paris</div>
+        <div class="card">The Plaza, New York</div>
+        <div class="card">Mandarin Oriental, Bangkok</div>
+        <div class="card">Marina Bay Sands, Singapore</div>
+        <div class="card">Shangri‑La, Tokyo</div>
+        <div class="card">The Langham, London</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Travel Reviews</h2>
+      <p>Read millions of authentic reviews from fellow travelers to help you pick the perfect hotel, restaurant, or attraction.</p>
+    </section>
+
+    <section class="section">
+      <h2>Booking Tools</h2>
+      <p>Compare prices across flights, hotels, and experiences, and book everything in one place.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 TripAdvisor • <a href="https://www.tripadvisor.com/">Home</a> • <a href="https://www.tripadvisor.com/TravelGuide">Travel Guide</a> • <a href="https://www.tripadvisor.com/HelpCenter">Help Center</a>
+  </footer>
+</body>
+</html>

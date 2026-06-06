@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mindtrip - Travel Better</title>
+  <style>
+    :root {
+      --ink: #202124;
+      --muted: #6a625b;
+      --cream: #fff8ef;
+      --paper: #ffffff;
+      --coral: #ff5a3d;
+      --teal: #1f7a8c;
+      --sun: #f6c85f;
+      --mint: #d9f2e6;
+      --line: rgba(32, 33, 36, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px clamp(20px, 5vw, 64px);
+      background: rgba(255, 248, 239, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 850;
+      letter-spacing: 0;
+      font-size: 20px;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--coral);
+      color: white;
+      font-weight: 900;
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .hero {
+      min-height: 620px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+      gap: clamp(28px, 6vw, 72px);
+      align-items: center;
+      padding: clamp(44px, 8vw, 92px) clamp(20px, 5vw, 64px) 44px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 90, 61, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 90, 61, 0.08);
+      color: #9f3426;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(58px, 11vw, 148px);
+      line-height: 0.82;
+      letter-spacing: 0;
+      font-weight: 950;
+    }
+
+    .better {
+      display: block;
+      color: var(--coral);
+    }
+
+    .intro {
+      max-width: 560px;
+      margin: 28px 0 0;
+      font-size: clamp(18px, 2.1vw, 24px);
+      line-height: 1.45;
+      color: var(--muted);
+      font-weight: 520;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      border-radius: 999px;
+      padding: 15px 22px;
+      font-weight: 800;
+      font-size: 15px;
+      border: 1px solid transparent;
+    }
+
+    .primary { background: var(--ink); color: white; }
+    .secondary { background: white; border-color: var(--line); color: var(--ink); }
+
+    .phone {
+      position: relative;
+      max-width: 430px;
+      min-height: 560px;
+      margin-left: auto;
+      padding: 18px;
+      border-radius: 38px;
+      background: #161616;
+      box-shadow: 0 32px 80px rgba(70, 45, 25, 0.24);
+    }
+
+    .screen {
+      height: 100%;
+      min-height: 524px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fef4e8, #ffffff 42%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .trip-photo {
+      height: 190px;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.4)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80") center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      color: white;
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .chat {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .bubble {
+      border-radius: 18px;
+      padding: 13px 14px;
+      font-size: 14px;
+      line-height: 1.35;
+      background: #f1eee9;
+      color: #3d3935;
+    }
+
+    .bubble.ai {
+      background: var(--mint);
+      border: 1px solid rgba(31, 122, 140, 0.16);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .mini-card {
+      min-height: 94px;
+      padding: 12px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 34px clamp(20px, 5vw, 64px) 70px;
+    }
+
+    .section h2 {
+      max-width: 720px;
+      margin: 0 0 24px;
+      font-size: clamp(32px, 5vw, 64px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 220px;
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 36px rgba(70, 45, 25, 0.08);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      margin-bottom: 42px;
+      background: rgba(255, 90, 61, 0.12);
+      color: var(--coral);
+      font-weight: 900;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.48;
+      font-size: 15px;
+    }
+
+    .feature-band {
+      margin: 0 clamp(20px, 5vw, 64px) 72px;
+      border-radius: 32px;
+      background: var(--ink);
+      color: white;
+      padding: clamp(28px, 5vw, 54px);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .feature-band h2 { margin: 0; font-size: clamp(34px, 5vw, 68px); line-height: 0.98; }
+    .feature-band p { margin: 0; color: rgba(255,255,255,0.72); font-size: 18px; line-height: 1.55; }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .tile {
+      min-height: 116px;
+      border-radius: 20px;
+      padding: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      font-weight: 760;
+    }
+
+    .tile span {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.52);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 30px clamp(20px, 5vw, 64px);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      .phone { margin: 0; max-width: none; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feature-band { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .links { display: none; }
+      .hero { padding-top: 34px; }
+      .phone { min-height: 500px; border-radius: 30px; }
+      .screen { min-height: 462px; }
+      .cards, .tiles { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .icon { margin-bottom: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand"><span class="mark">M</span> Mindtrip</div>
+    <div class="links">
+      <span>Get inspired</span>
+      <span>For Creators</span>
+      <span>For Business</span>
+      <span class="pill">Start chatting</span>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">AI-powered travel, personalized to you</div>
+        <h1>Travel <span class="better">better.</span></h1>
+        <p class="intro">Mindtrip brings the world to you and helps shape every trip around your taste, timing, crew, and saved inspiration.</p>
+        <div class="actions">
+          <div class="button primary">Start chatting</div>
+          <div class="button secondary">Explore itineraries</div>
+        </div>
+      </div>
+
+      <aside class="phone" aria-label="Mindtrip app preview">
+        <div class="screen">
+          <div class="trip-photo">Kyoto in spring</div>
+          <div class="chat">
+            <div class="bubble">Plan a 5-day food, design, and garden trip with easy mornings.</div>
+            <div class="bubble ai">Here is a relaxed itinerary with neighborhood walks, cherry blossom viewpoints, ramen counters, and bookable stays.</div>
+            <div class="mini-grid">
+              <div class="mini-card"><strong>Day 1</strong>Gion tea houses, Nishiki Market, quiet dinner.</div>
+              <div class="mini-card"><strong>Saved</strong>12 places, 4 hotels, 3 experiences.</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2>Everything for the trip, gathered in one place.</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">01</div>
+          <h3>Start chatting</h3>
+          <p>Ask for destination ideas, full itineraries, or recommendations tuned to the experiences you love.</p>
+        </article>
+        <article class="card">
+          <div class="icon">02</div>
+          <h3>Personalized picks</h3>
+          <p>Browse photos, reviews, maps, restaurants, hotels, experiences, and places worth saving.</p>
+        </article>
+        <article class="card">
+          <div class="icon">03</div>
+          <h3>Plan together</h3>
+          <p>Invite friends and family, collect ideas, comment, like, and turn group chat chaos into a shared plan.</p>
+        </article>
+        <article class="card">
+          <div class="icon">04</div>
+          <h3>Organize receipts</h3>
+          <p>Upload confirmations and travel receipts so booking details stay close while you travel.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="feature-band">
+      <h2>New ways to begin a trip.</h2>
+      <div class="tiles">
+        <div class="tile">Events<span>Concerts, comedy, markets, and family fun nearby.</span></div>
+        <div class="tile">Google Pins<span>Import saved places and turn them into trip collections.</span></div>
+        <div class="tile">Start Anywhere<span>Use a link, screenshot, photo, or PDF as the spark.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Mindtrip for iOS</strong>
+    <span>Photos, maps, reviews, tailored recommendations, customizable trip plans, and collaboration tools.</span>
+  </footer>
+</body>
+</html>
