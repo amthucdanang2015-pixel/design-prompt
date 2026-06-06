@@ -17,6 +17,7 @@ export interface PromptItem {
   mode: 'light' | 'dark';
   type: 'sans' | 'serif' | 'mono';
   colors: ColorPalette;
+  url?: string;
   tagline: string;
   description: string;
   ctaLabel: string;
