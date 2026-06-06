@@ -20,12 +20,18 @@ export default function Home() {
   useEffect(() => {
     const found = prompts.find((p) => p.id === selectedId);
     if (found && found.id !== displayedItem.id) {
-      setAnimating(true);
-      const timeout = setTimeout(() => {
-        setDisplayedItem(found);
-        setAnimating(false);
-      }, 180);
-      return () => clearTimeout(timeout);
+      let transitionTimeout: number | undefined;
+      const timeout = window.setTimeout(() => {
+        setAnimating(true);
+        transitionTimeout = window.setTimeout(() => {
+          setDisplayedItem(found);
+          setAnimating(false);
+        }, 180);
+      }, 0);
+      return () => {
+        window.clearTimeout(timeout);
+        if (transitionTimeout) window.clearTimeout(transitionTimeout);
+      };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);
