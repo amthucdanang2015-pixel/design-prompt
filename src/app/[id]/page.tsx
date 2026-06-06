@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { prompts } from '@/data/prompts';
 import LandingPreview from '@/components/LandingPreview';
@@ -62,8 +63,8 @@ export default function PreviewPage() {
       <div className="flex h-screen w-screen items-center justify-center bg-[#080812] text-white font-sans">
         <div className="text-center">
           <h1 className="text-xl font-bold mb-2">Style Not Found</h1>
-          <p className="text-slate-400 text-sm">The preview ID "{id}" is invalid or does not exist.</p>
-          <a href="/" className="mt-4 inline-block text-violet-400 hover:underline text-sm">← Back to explorer</a>
+          <p className="text-slate-400 text-sm">The preview ID &quot;{id}&quot; is invalid or does not exist.</p>
+          <Link href="/" className="mt-4 inline-block text-violet-400 hover:underline text-sm">← Back to explorer</Link>
         </div>
       </div>
     );
@@ -73,10 +74,19 @@ export default function PreviewPage() {
     <div className="relative w-screen h-screen overflow-hidden flex flex-col">
       {/* Dynamic Landing Page Preview with fade animation */}
       <div
-        className="flex-1 overflow-auto transition-all duration-200"
-        style={{ opacity: fadeIn && !animating ? 1 : 0, transform: fadeIn && !animating ? 'scale(1)' : 'scale(0.995)' }}
+        className={`flex-1 overflow-auto transition-all duration-200 ${item.mode === 'dark' ? 'scrollbar-dark' : 'scrollbar-light'}`}
+        style={{ opacity: fadeIn && !animating ? 1 : 0, transform: fadeIn && !animating ? 'scale(1)' : 'scale(0.995)', backgroundColor: item.colors.bg }}
       >
-        <LandingPreview item={item} />
+        {item.url ? (
+          <iframe
+            src={item.url}
+            title={`${item.title} static preview`}
+            className="h-full w-full border-0"
+            sandbox="allow-same-origin"
+          />
+        ) : (
+          <LandingPreview item={item} />
+        )}
       </div>
 
       {/* Style Picker Overlay */}
