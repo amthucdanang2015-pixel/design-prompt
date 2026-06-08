@@ -2,6 +2,27 @@ import { PromptItem } from '@/types';
 
 export const prompts: PromptItem[] = [
   {
+    id: 'kargul',
+    index: 11,
+    title: 'Kargul Studio',
+    subtitle: 'Design and Dev Studio',
+    mode: 'light',
+    type: 'sans',
+    colors: {
+      primary: '#111111',
+      secondary: '#D8FF3F',
+      accent: '#FF6A3D',
+      bg: '#F4EFE6',
+      text: '#111111',
+    },
+    url: '/kargul.html',
+    tagline: 'A full-stack design and dev partner.',
+    description:
+      'Kargul Studio creates websites, product design, and branding for high-growth startups where quality is non-negotiable.',
+    ctaLabel: 'Book Intro Call',
+    features: ['Senior talent only', 'Pixel-perfect builds', 'Brand, product, and web'],
+  },
+  {
     id: 'tripadvisor',
     index: 11,
     title: 'TripAdvisor',
