@@ -29,11 +29,10 @@ export default function PromptCard({ item, isActive, onClick }: PromptCardProps)
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 transition-all duration-200 group ${
-        isActive
-          ? 'bg-white/10 ring-1 ring-white/15 shadow-lg'
-          : 'hover:bg-white/5'
-      }`}
+      className={`w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 transition-all duration-200 group ${isActive
+        ? 'bg-white/10 ring-1 ring-white/15 shadow-lg'
+        : 'hover:bg-white/5'
+        }`}
     >
       {/* Color swatch / thumbnail */}
       <div
@@ -47,9 +46,8 @@ export default function PromptCard({ item, isActive, onClick }: PromptCardProps)
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 mb-0.5">
           <span
-            className={`text-sm font-semibold truncate ${
-              isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'
-            }`}
+            className={`text-sm font-semibold truncate ${isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'
+              }`}
           >
             {item.title}
           </span>
@@ -67,9 +65,8 @@ export default function PromptCard({ item, isActive, onClick }: PromptCardProps)
 
       {/* Index */}
       <span
-        className={`text-xs font-mono flex-shrink-0 tabular-nums ${
-          isActive ? 'text-violet-400' : 'text-slate-600'
-        }`}
+        className={`text-xs font-mono flex-shrink-0 tabular-nums ${isActive ? 'text-violet-400' : 'text-slate-600'
+          }`}
       >
         {String(item.index).padStart(2, '0')}
       </span>
