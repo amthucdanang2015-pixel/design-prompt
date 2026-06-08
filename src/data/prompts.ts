@@ -3,7 +3,7 @@ import { PromptItem } from '@/types';
 export const prompts: PromptItem[] = [
   {
     id: 'kargul',
-    index: 11,
+    index: 1,
     title: 'Kargul Studio',
     subtitle: 'Design and Dev Studio',
     mode: 'light',
@@ -24,7 +24,7 @@ export const prompts: PromptItem[] = [
   },
   {
     id: 'tripadvisor',
-    index: 11,
+    index: 2,
     title: 'TripAdvisor',
     subtitle: 'Travel Reviews',
     mode: 'light',
@@ -44,7 +44,7 @@ export const prompts: PromptItem[] = [
   },
   {
     id: 'mindtrip',
-    index: 12,
+    index: 3,
     title: 'Mindtrip',
     subtitle: 'AI Travel Planner',
     mode: 'light',
@@ -65,7 +65,7 @@ export const prompts: PromptItem[] = [
   },
   {
     id: 'spottedinprod',
-    index: 11,
+    index: 4,
     title: 'Spotted in Prod',
     subtitle: 'iOS Clip Library',
     mode: 'light',
@@ -84,4 +84,47 @@ export const prompts: PromptItem[] = [
     ctaLabel: 'Join SIP',
     features: ['iOS interaction clips', 'App inspiration library', 'Community and jobs'],
   },
+  {
+    id: 'coss',
+    index: 5,
+    title: 'coss ui',
+    subtitle: 'Base UI Library',
+    mode: 'light',
+    type: 'sans',
+    colors: {
+      primary: '#111111',
+      secondary: '#3F3F46',
+      accent: '#E4E4E7',
+      bg: '#FAFAFA',
+      text: '#111111',
+    },
+    url: '/coss.html',
+    tagline: 'A modern UI library built on Base UI.',
+    description:
+      'coss ui is a minimal component library built for developers and AI, with docs, particles, command search, and hundreds of accessible primitives.',
+    ctaLabel: 'Browse Particles',
+    features: ['Base UI primitives', '484 particles', 'Built for developers and AI'],
+  },
+  {
+    id: 'heroui',
+    index: 6,
+    title: 'HeroUI',
+    subtitle: 'UI Library',
+    mode: 'light',
+    type: 'sans',
+    colors: {
+      primary: '#7C3AED',
+      secondary: '#2563EB',
+      accent: '#22D3EE',
+      bg: '#F8FAFC',
+      text: '#0F172A',
+    },
+    url: '/heroui.html',
+    tagline: 'Beautiful by default. Customizable by design.',
+    description:
+      'HeroUI is a modern UI library for web and mobile, built to help teams move fast, stay consistent, and ship delightful product experiences.',
+    ctaLabel: 'View Components',
+    features: ['Web and mobile UI', 'Themeable components', 'Open source library'],
+  },
+
 ];
