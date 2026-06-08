@@ -9,7 +9,7 @@ interface PreviewBrowserProps {
 
 export default function PreviewBrowser({ item }: PreviewBrowserProps) {
   const { colors, url } = item;
-  const fakeUrl = `https://designprompt-umber.vercel.app/${item.title.toLowerCase()}`;
+  const fakeUrl = `${item.id.toLowerCase()}.app`;
 
   return (
     <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10">
