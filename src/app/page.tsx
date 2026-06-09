@@ -18,6 +18,15 @@ export default function Home() {
 
   // Resolve the displayed item from selectedId
   useEffect(() => {
+    let returnTimeout: number | undefined;
+
+    if (window.sessionStorage.getItem('return-to-prompt-list') === 'true') {
+      window.sessionStorage.removeItem('return-to-prompt-list');
+      returnTimeout = window.setTimeout(() => {
+        setMobileView('list');
+      }, 0);
+    }
+
     const found = prompts.find((p) => p.id === selectedId);
     if (found && found.id !== displayedItem.id) {
       let transitionTimeout: number | undefined;
@@ -29,10 +38,14 @@ export default function Home() {
         }, 180);
       }, 0);
       return () => {
+        if (returnTimeout) window.clearTimeout(returnTimeout);
         window.clearTimeout(timeout);
         if (transitionTimeout) window.clearTimeout(transitionTimeout);
       };
     }
+    return () => {
+      if (returnTimeout) window.clearTimeout(returnTimeout);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);
 
@@ -53,8 +66,20 @@ export default function Home() {
     setSelectedId(prompts[nextIndex].id);
   };
 
+  const handleOpen = () => {
+    window.sessionStorage.setItem('return-to-prompt-list', 'true');
+  };
+
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#080812]">
+    <div className="relative flex h-screen w-screen overflow-hidden bg-[#07070d] text-slate-100">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(circle at 22% 0%, rgba(124, 58, 237, 0.18), transparent 32%), radial-gradient(circle at 84% 18%, rgba(34, 211, 238, 0.12), transparent 28%), linear-gradient(180deg, rgba(255,255,255,0.035), transparent 34%)',
+        }}
+      />
       {/* Left sidebar — full width on mobile when mobileView === 'list', hidden otherwise */}
       <div
         className={`
@@ -77,12 +102,12 @@ export default function Home() {
         `}
       >
         {/* Header bar */}
-        <div className="flex-shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/5 bg-[#0B0B18]">
+        <div className="relative z-10 flex-shrink-0 flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/[0.07] bg-[#090912]/88 backdrop-blur-xl">
           <div className="flex items-center gap-3 min-w-0 flex-1 mr-4">
             {/* Mobile back button */}
             <button
               onClick={() => setMobileView('list')}
-              className="md:hidden flex-shrink-0 w-8 h-8 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:bg-white/5 flex items-center justify-center transition-all"
+              className="md:hidden flex-shrink-0 w-8 h-8 rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/8 flex items-center justify-center transition-all"
               aria-label="Back to list"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -92,39 +117,40 @@ export default function Home() {
 
             {/* Thumbnail */}
             <div
-              className="w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center shadow-lg"
+              className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center shadow-lg shadow-black/25"
               style={{
                 background: `linear-gradient(135deg, ${displayedItem.colors.primary}, ${displayedItem.colors.secondary})`,
-                border: `2px solid ${displayedItem.colors.accent}44`
+                border: `1px solid ${displayedItem.colors.accent}66`,
+                boxShadow: `0 12px 30px ${displayedItem.colors.primary}30`
               }}
             >
-              <span className="text-white text-xs font-bold font-mono">
+              <span className="text-white text-[11px] font-bold font-mono">
                 {displayedItem.title[0]}
               </span>
             </div>
             {/* Text details */}
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <h2 className="text-sm font-semibold text-white truncate max-w-[120px] sm:max-w-none">
+                <h2 className="text-[15px] font-semibold text-white truncate max-w-[120px] sm:max-w-none leading-none">
                   {displayedItem.title}
                 </h2>
                 {/* Badges */}
                 <span
-                  className={`text-[9px] px-1.5 py-0.5 rounded-md font-medium ${displayedItem.mode === 'dark'
+                  className={`text-[10px] px-1.5 py-0.5 rounded-md font-medium leading-none ${displayedItem.mode === 'dark'
                     ? 'bg-violet-400/15 text-violet-300'
                     : 'bg-amber-400/15 text-amber-300'
                     }`}
                 >
-                  {displayedItem.mode === 'dark' ? '🌙 Dark' : '☀️ Light'}
+                  {displayedItem.mode === 'dark' ? 'Dark' : 'Light'}
                 </span>
-                <span className="text-[9px] px-1.5 py-0.5 rounded-md font-medium bg-white/5 text-slate-400 capitalize">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-md font-medium leading-none bg-white/5 text-slate-400 capitalize">
                   {displayedItem.type}
                 </span>
-                <span className="text-[9px] font-mono text-slate-600 hidden sm:inline">
+                <span className="text-[10px] font-mono text-slate-500 hidden sm:inline">
                   #{String(displayedItem.index).padStart(2, '0')}
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 truncate mt-0.5 hidden md:block">
+              <p className="text-[11px] text-slate-400 truncate mt-1 hidden md:block">
                 {displayedItem.description}
               </p>
             </div>
@@ -135,7 +161,7 @@ export default function Home() {
             {/* Navigation buttons */}
             <button
               onClick={handlePrev}
-              className="w-8 h-8 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:bg-white/5 flex items-center justify-center transition-all cursor-pointer"
+              className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/8 flex items-center justify-center transition-all cursor-pointer"
               title="Previous Style"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -144,7 +170,7 @@ export default function Home() {
             </button>
             <button
               onClick={handleNext}
-              className="w-8 h-8 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:bg-white/5 flex items-center justify-center transition-all cursor-pointer"
+              className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/8 flex items-center justify-center transition-all cursor-pointer"
               title="Next Style"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -158,7 +184,7 @@ export default function Home() {
             {/* Get Prompt button */}
             <button
               onClick={() => setIsPromptOpen(true)}
-              className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-medium text-xs text-slate-300 hover:bg-white/10 hover:text-white transition-all cursor-pointer"
+              className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 font-semibold text-xs text-slate-300 hover:bg-white/10 hover:text-white transition-all cursor-pointer"
             >
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -171,7 +197,8 @@ export default function Home() {
               href={`/${displayedItem.id}`}
               target="_self"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium text-xs transition-all hover:scale-[1.05] shadow-lg"
+              onClick={handleOpen}
+              className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-semibold text-xs transition-all hover:scale-[1.03] shadow-lg"
               style={{
                 background: `linear-gradient(135deg, ${displayedItem.colors.primary}, ${displayedItem.colors.secondary})`,
                 color: '#FFFFFF',
@@ -187,7 +214,7 @@ export default function Home() {
         </div>
 
         {/* Preview area */}
-        <div className="flex-1 p-4 sm:p-6 overflow-hidden">
+        <div className="relative z-10 flex-1 p-3 sm:p-5 lg:p-6 overflow-hidden">
           <div
             className={`h-full transition-all duration-200 ease-out ${animating ? 'opacity-0 scale-[0.99] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
               }`}
