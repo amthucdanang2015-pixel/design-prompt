@@ -38,19 +38,19 @@ const typeOptions: { label: string; value: FontType }[] = [
 
 export default function FilterBar({ filters, onChange }: FilterBarProps) {
   return (
-    <div className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-white/[0.06] px-3 py-2 sm:px-4 sm:py-3">
+    <div className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-white/[0.07] px-3 py-2.5 sm:px-4 sm:py-3 bg-black/[0.08]">
       {/* Mode */}
       <div className="flex items-center gap-1.5">
-        <span className="font-medium text-[10px] text-white/40 uppercase tracking-wider">Mode</span>
-        <div className="flex gap-0.5">
+        <span className="font-semibold text-[10px] text-white/35 uppercase">Mode</span>
+        <div className="flex gap-0.5 rounded-lg bg-white/[0.035] p-0.5 ring-1 ring-white/[0.04]">
           {modeOptions.map((opt) => (
             <button
               key={opt.value}
               type="button"
               onClick={() => onChange({ ...filters, mode: opt.value })}
-              className={`flex items-center gap-1 rounded-md px-2 py-1 font-medium text-[11px] transition-all ${
+              className={`flex items-center gap-1 rounded-md px-2 py-1 font-semibold text-[11px] transition-all ${
                 filters.mode === opt.value
-                  ? 'bg-white/15 text-white'
+                  ? 'bg-white/15 text-white shadow-sm shadow-black/20'
                   : 'text-white/50 hover:bg-white/5 hover:text-white/70'
               }`}
             >
@@ -63,16 +63,16 @@ export default function FilterBar({ filters, onChange }: FilterBarProps) {
 
       {/* Type */}
       <div className="flex items-center gap-1.5">
-        <span className="font-medium text-[10px] text-white/40 uppercase tracking-wider">Type</span>
-        <div className="flex gap-0.5">
+        <span className="font-semibold text-[10px] text-white/35 uppercase">Type</span>
+        <div className="flex gap-0.5 rounded-lg bg-white/[0.035] p-0.5 ring-1 ring-white/[0.04]">
           {typeOptions.map((opt) => (
             <button
               key={opt.value}
               type="button"
               onClick={() => onChange({ ...filters, type: opt.value })}
-              className={`flex items-center gap-1 rounded-md px-2 py-1 font-medium text-[11px] transition-all ${
+              className={`flex items-center gap-1 rounded-md px-2 py-1 font-semibold text-[11px] transition-all ${
                 filters.type === opt.value
-                  ? 'bg-white/15 text-white'
+                  ? 'bg-white/15 text-white shadow-sm shadow-black/20'
                   : 'text-white/50 hover:bg-white/5 hover:text-white/70'
               }`}
             >
