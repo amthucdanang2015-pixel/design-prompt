@@ -31,6 +31,7 @@ export default function PromptList({ items, filters, selectedId, onSelect }: Pro
             item={item}
             isActive={item.id === selectedId}
             onClick={() => onSelect(item.id)}
+            favicon={item.favicon}
           />
         ))
       )}
