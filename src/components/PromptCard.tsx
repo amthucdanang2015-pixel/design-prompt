@@ -6,6 +6,7 @@ interface PromptCardProps {
   item: PromptItem;
   isActive: boolean;
   onClick: () => void;
+  favicon: string;
 }
 
 const fontTypeIcon: Record<string, string> = {
@@ -25,7 +26,7 @@ const typeColors: Record<string, string> = {
   mono: 'bg-emerald-400/20 text-emerald-300',
 };
 
-export default function PromptCard({ item, isActive, onClick }: PromptCardProps) {
+export default function PromptCard({ item, isActive, onClick, favicon }: PromptCardProps) {
   return (
     <button
       onClick={onClick}
@@ -37,13 +38,11 @@ export default function PromptCard({ item, isActive, onClick }: PromptCardProps)
     >
       {/* Color swatch / thumbnail */}
       <div
-        className="w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center text-[12px] font-bold shadow-md transition-transform duration-200 group-hover:scale-105 ring-1 ring-white/10"
         style={{
-          background: `linear-gradient(135deg, ${item.colors.primary}, ${item.colors.secondary})`,
-          color: '#fff',
+          backgroundColor: ` ${["coss", "tripadvisor"].includes(item.id) ? "#fff" : ""}`,
         }}
       >
-        {fontTypeIcon[item.type]}
+        <img src={favicon} alt={item.title} width={40} height={40} />
       </div>
 
       {/* Text */}

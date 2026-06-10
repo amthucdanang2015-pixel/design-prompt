@@ -29,7 +29,7 @@ export default function PreviewBrowser({ item }: PreviewBrowserProps) {
             <div
               className="flex w-[190px] items-center gap-2 rounded-t-[18px] bg-[#0f0f15] px-4 py-2"
               style={{
-                  borderTop: `2px solid ${colors.primary}`,
+                borderTop: `2px solid ${colors.primary}`,
               }}
             >
               <div
@@ -39,7 +39,7 @@ export default function PreviewBrowser({ item }: PreviewBrowserProps) {
                   fontSize: '7px',
                 }}
               >
-                {item.title[0]}
+                <img src={item.favicon} alt={item.title} className="w-3.5 h-3.5 rounded" />
               </div>
               <span className="max-w-[120px] truncate text-xs text-white/80">
                 {item.title}
