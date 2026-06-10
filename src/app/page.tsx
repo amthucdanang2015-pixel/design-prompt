@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
 import { PromptItem } from '@/types';
 import { prompts } from '@/data/prompts';
 import Sidebar from '@/components/Sidebar';
@@ -11,42 +12,25 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 export default function Home() {
   const [selectedId, setSelectedId] = useLocalStorage<string>('selected-prompt-id', prompts[0].id);
   const [animating, setAnimating] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [displayedItem, setDisplayedItem] = useState<PromptItem>(prompts[0]);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   // Mobile master/detail: 'list' = sidebar visible, 'detail' = preview visible
   const [mobileView, setMobileView] = useState<'list' | 'detail'>('list');
 
-  // Resolve the displayed item from selectedId
   useEffect(() => {
-    let returnTimeout: number | undefined;
-
-    if (window.sessionStorage.getItem('return-to-prompt-list') === 'true') {
-      window.sessionStorage.removeItem('return-to-prompt-list');
-      returnTimeout = window.setTimeout(() => {
-        setMobileView('list');
-      }, 0);
-    }
-
     const found = prompts.find((p) => p.id === selectedId);
-    if (found && found.id !== displayedItem.id) {
-      let transitionTimeout: number | undefined;
-      const timeout = window.setTimeout(() => {
-        setAnimating(true);
-        transitionTimeout = window.setTimeout(() => {
-          setDisplayedItem(found);
-          setAnimating(false);
-        }, 180);
-      }, 0);
-      return () => {
-        if (returnTimeout) window.clearTimeout(returnTimeout);
-        window.clearTimeout(timeout);
-        if (transitionTimeout) window.clearTimeout(transitionTimeout);
-      };
-    }
-    return () => {
-      if (returnTimeout) window.clearTimeout(returnTimeout);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    if (!found || found.id === displayedItem.id) return;
+
+    setLoading(true);
+
+    const timeout = setTimeout(() => {
+      setDisplayedItem(found);
+      setLoading(false);
+    }, 180);
+
+    return () => clearTimeout(timeout);
   }, [selectedId]);
 
   const handleSelect = (id: string) => {
@@ -219,7 +203,13 @@ export default function Home() {
             className={`h-full transition-all duration-200 ease-out ${animating ? 'opacity-0 scale-[0.99] translate-y-1' : 'opacity-100 scale-100 translate-y-0'
               }`}
           >
-            <PreviewBrowser item={displayedItem} />
+            {loading ? (
+              <div className="flex items-center justify-center h-full">
+                <Loader2 className="w-8 h-8 animate-spin text-violet-400" />
+              </div>
+            ) : (
+              <PreviewBrowser item={displayedItem} />
+            )}
           </div>
         </div>
       </main>
