@@ -205,11 +205,17 @@ export default function Home() {
           >
             {loading ? (
               <div className="flex items-center justify-center h-full">
-                <Loader2 className="w-8 h-8 animate-spin text-violet-400" />
+                <div className="flex loading-text flex-col items-center gap-[10px]">
+                  <Loader2 className="w-8 h-8 animate-spin text-violet-400" />
+                  <h2 className="text-xl font-bold text-white">
+                    Loading Preview...
+                  </h2>
+                </div>
               </div>
             ) : (
               <PreviewBrowser item={displayedItem} />
             )}
+
           </div>
         </div>
       </main>

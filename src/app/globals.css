@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @layer base {
+
   html,
   body {
     height: 100%;
@@ -90,5 +91,27 @@
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background-color: rgba(180, 180, 200, 0.45);
+  }
+
+  .loading-text {
+    background: linear-gradient(90deg,
+        #ffffff,
+        #60a5fa,
+        #f87171,
+        #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 3s linear infinite;
+  }
+
+  @keyframes gradientText {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    100% {
+      background-position: 300% 50%;
+    }
   }
 }
