@@ -108,9 +108,7 @@ export default function Home() {
                 boxShadow: `0 12px 30px ${displayedItem.colors.primary}30`
               }}
             >
-              <span className="text-white text-[11px] font-bold font-mono">
-                {displayedItem.title[0]}
-              </span>
+              <img src={displayedItem.favicon} className="text-white text-[11px] font-bold font-mono" alt={displayedItem.title} />
             </div>
             {/* Text details */}
             <div className="min-w-0 flex-1">
