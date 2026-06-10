@@ -155,10 +155,10 @@ export const prompts: PromptItem[] = [
     features: ['Web and mobile UI', 'Themeable components', 'Open source library'],
   },
   {
-    id: 'save',
+    id: 'savee',
     index: 7,
-    title: 'Hubtown - Awwwards SOTD',
-    subtitle: 'Hubtown - Awwwards SOTD',
+    title: 'Savee',
+    subtitle: 'Savee',
     mode: 'dark',
     type: 'mono',
     colors: {
