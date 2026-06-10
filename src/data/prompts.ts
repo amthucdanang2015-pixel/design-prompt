@@ -8,6 +8,7 @@ export const prompts: PromptItem[] = [
     subtitle: 'Design and Dev Studio',
     mode: 'light',
     type: 'sans',
+    favicon: 'favicon/kargul.ico',
     colors: {
       primary: '#111111',
       secondary: '#D8FF3F',
@@ -37,6 +38,7 @@ export const prompts: PromptItem[] = [
       text: '#111111',
     },
     url: '/tripadvisor.html',
+    favicon: '/favicon/tripadvisor.svg',
     tagline: 'Explore the world.',
     description: 'TripAdvisor offers millions of reviews and travel insights to help you plan the perfect trip.',
     ctaLabel: 'Discover Destinations',
@@ -57,6 +59,7 @@ export const prompts: PromptItem[] = [
       text: '#202124',
     },
     url: '/mindtrip.html',
+    favicon: '/favicon/mindtrip.ico',
     tagline: 'Travel better.',
     description:
       'Mindtrip is an AI-powered travel companion for personalized recommendations, itineraries, collaboration, receipts, maps, photos, and reviews.',
@@ -77,6 +80,7 @@ export const prompts: PromptItem[] = [
       bg: '#F7F6F2',
       text: '#111111',
     },
+    favicon: '/favicon/spottedinprod.png',
     url: '/spottedinprod.html',
     tagline: 'The very best of iOS.',
     description:
@@ -92,12 +96,13 @@ export const prompts: PromptItem[] = [
     mode: 'light',
     type: 'sans',
     colors: {
-      primary: '#111111',
+      primary: '#fff',
       secondary: '#3F3F46',
       accent: '#E4E4E7',
       bg: '#FAFAFA',
       text: '#111111',
     },
+    favicon: '/favicon/coss.png',
     url: '/coss.html',
     tagline: 'A modern UI library built on Base UI.',
     description:
@@ -119,6 +124,7 @@ export const prompts: PromptItem[] = [
       bg: '#F8FAFC',
       text: '#0F172A',
     },
+    favicon: '/favicon/heroui.png',
     url: '/heroui.html',
     tagline: 'Beautiful by default. Customizable by design.',
     description:
