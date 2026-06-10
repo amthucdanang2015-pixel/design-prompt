@@ -22,6 +22,7 @@ export interface PromptItem {
   description: string;
   ctaLabel: string;
   features: string[];
+  favicon: string;
 }
 
 export interface Filters {
