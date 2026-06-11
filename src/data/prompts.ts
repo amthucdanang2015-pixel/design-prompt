@@ -176,4 +176,26 @@ export const prompts: PromptItem[] = [
     ctaLabel: 'View Components',
     features: ['Web and mobile UI', 'Themeable components', 'Open source library'],
   },
+  {
+    id: 'lumen',
+    index: 8,
+    title: 'lumen',
+    subtitle: 'lumen',
+    mode: 'dark',
+    type: 'mono',
+    colors: {
+      primary: '#7C3AED',
+      secondary: '#2563EB',
+      accent: '#22D3EE',
+      bg: '#F8FAFC',
+      text: '#0F172A',
+    },
+    favicon: '/favicon/lumen.png',
+    url: '/lumen.html',
+    tagline: 'Beautiful by default. Customizable by design.',
+    description:
+      'LUMEN, the generative shader studio',
+    ctaLabel: 'View Components',
+    features: ['Web and mobile UI', 'Themeable components', 'Open source library'],
+  },
 ];
